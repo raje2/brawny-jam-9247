@@ -127,7 +127,7 @@ Step 3: Create a Separated Unitily package fro making a database connection...
 	
 	Class.forName("com.mysql.cj.jdbc.Driver");
 		
-        String url="jdbc:mysql://localhost:3306/sb101_project";
+        String url="jdbc:mysql://localhost:3306/powerproject";
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
