@@ -20,7 +20,7 @@ employee must report to this department. Engineers from this department take car
 
 
 <h3>Roles for the HOD:</h3>
-<p>•	Login into the system </p>
+<p>•	Login into the system  hardcode hod username and password(rajesh123,1234)</p>
 <p>•	Register a new Engineer with a username(email) and password and the category (Hardware/software)</p>
 <p>•	Can see List of all the Registered Engineers.</p>
 <p>•	Can Delete any Engineers from the system</p>
