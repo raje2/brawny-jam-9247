@@ -8,7 +8,7 @@ public class DButil {
 	
 public static Connection provideConnection() {
 		
-		Connection conn = null;
+		Connection connection = null;
 		
 		try {
 			
@@ -23,7 +23,7 @@ public static Connection provideConnection() {
 		
 		try {
 			
-			conn = DriverManager.getConnection(url,"root","Badalstb1234");
+			connection = DriverManager.getConnection(url,"root","Badalstb1234");
 			
 		} catch (SQLException e) {
 			
@@ -31,7 +31,7 @@ public static Connection provideConnection() {
 		}
 		
 		
-		return conn;
+		return connection;
 	}
 
 }

@@ -30,19 +30,19 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
 	
 		
-		try(Connection conn= DButil.provideConnection()) {
+		try(Connection connection = DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement
+			PreparedStatement preparedstatement = connection.prepareStatement
 					("insert into Engineer values(?,?,?,?)");
 			
 			
 			
-			ps.setString(1, name);
-			ps.setString(2, email);
-			ps.setString(3, password);
-			ps.setString(4, category);
+			preparedstatement.setString(1, name);
+			preparedstatement.setString(2, email);
+			preparedstatement.setString(3, password);
+			preparedstatement.setString(4, category);
 			
-			int x= ps.executeUpdate();
+			int x= preparedstatement.executeUpdate();
 			
 			
 			if(x > 0)
@@ -72,19 +72,19 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
 	
 		
-		try(Connection conn= DButil.provideConnection()) {
+		try(Connection connection = DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement
+			PreparedStatement preparedstatement = connection.prepareStatement
 					("insert into Engineer(name,email,password,category) values(?,?,?,?)");
 			
 			
 			
-			ps.setString(1, engineer.getName());
-			ps.setString(2, engineer.getEmail());
-			ps.setString(3, engineer.getPassword());
-			ps.setString(4, engineer.getCategory());
+			preparedstatement.setString(1, engineer.getName());
+			preparedstatement.setString(2, engineer.getEmail());
+			preparedstatement.setString(3, engineer.getPassword());
+			preparedstatement.setString(4, engineer.getCategory());
 			
-			int x= ps.executeUpdate();
+			int x= preparedstatement.executeUpdate();
 			
 			
 			if(x > 0)
@@ -111,21 +111,21 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
 		try(Connection conn= DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement("select * from Engineer");
+			PreparedStatement preparedstatement = conn.prepareStatement("select * from Engineer");
 			
 			
 			
-			ResultSet rs= ps.executeQuery();
+			ResultSet resultset = preparedstatement.executeQuery();
 			
-			while(rs.next()) {
+			while(resultset.next()) {
 				
 				
-				String r= rs.getString("name");
-				String e= rs.getString("email");
-				String p= rs.getString("password");
-				String c= rs.getString("category");
+				String name= resultset.getString("name");
+				String email= resultset.getString("email");
+				String password= resultset.getString("password");
+				String category= resultset.getString("category");
 				
-			Engineer engineer=new Engineer(r, e, p, c);	
+			Engineer engineer=new Engineer(name, email, password, category);	
 				
 			engineers.add(engineer);
 			
@@ -152,13 +152,13 @@ public class EngineerDeoImpl implements EngineerDeo{
 		String message = "Engineer assigned with problem so you can't delete !";
 		
 		
-		try(Connection conn = DButil.provideConnection()) {
+		try(Connection connection = DButil.provideConnection()) {
 			
-			PreparedStatement ps = conn.prepareStatement("delete from Engineer where name = ?");
+			PreparedStatement preparedstatement = connection.prepareStatement("delete from Engineer where name = ?");
 			
-			ps.setString(1, name);
+			preparedstatement.setString(1, name);
 			
-			int x = ps.executeUpdate();
+			int x = preparedstatement.executeUpdate();
 			
 			if(x>0) {
 				message = (name+" engineer data is deleted!");
@@ -178,33 +178,33 @@ public class EngineerDeoImpl implements EngineerDeo{
 	public String assignProblemWithEngineer(int pid, String name) throws EngineerException, ProblemException {
 		String message = "not assign!";
 		
-		try(Connection conn= DButil.provideConnection()) {
+		try(Connection connection= DButil.provideConnection()) {
 			
-		 	PreparedStatement ps= conn.prepareStatement("select * from Engineer where name =?");
+		 	PreparedStatement preparedstatement = connection.prepareStatement("select * from Engineer where name =?");
 			
 		 	
-		 	ps.setString(1, name);
+		 	preparedstatement.setString(1, name);
 		 	
-		 	ResultSet rs= ps.executeQuery();
+		 	ResultSet resultset= preparedstatement.executeQuery();
 			
-		 	if(rs.next()) {
+		 	if(resultset.next()) {
 		 		
-		 		PreparedStatement ps2= conn.prepareStatement("select * from problem where pid=?");
+		 		PreparedStatement preparedstatement2= connection.prepareStatement("select * from problem where pid=?");
 		 		
-		 		ps2.setInt(1, pid);
+		 		preparedstatement2.setInt(1, pid);
 
-		 		ResultSet rs2= ps2.executeQuery();
+		 		ResultSet resultset2= preparedstatement2.executeQuery();
 		 		
-		 		if(rs2.next()) {
+		 		if(resultset2.next()) {
 		 			
 
-		 			PreparedStatement ps3= conn.prepareStatement("insert into pro_eng values(?,?)");
+		 			PreparedStatement preparedstatement3= connection.prepareStatement("insert into pro_eng values(?,?)");
 		 			
 		 			
-		 			ps3.setInt(1, pid);
-		 			ps3.setString(2, name);
+		 			preparedstatement3.setInt(1, pid);
+		 			preparedstatement3.setString(2, name);
 		 			
-		 			int x= ps3.executeUpdate();
+		 			int x= preparedstatement3.executeUpdate();
 		 			
 		 			if(x > 0)
 		 				message = "Enginner assigned to releated problem Sucessfully.. ";
@@ -246,15 +246,15 @@ public class EngineerDeoImpl implements EngineerDeo{
 		String message = "no ligin";
 		
 		
-        try(Connection conn = DButil.provideConnection()) {
+        try(Connection connection = DButil.provideConnection()) {
 			
 			
-			PreparedStatement ps= conn.prepareStatement("select * from hod where hname = ? AND hpassword = ?");			
+			PreparedStatement preparedstatement = connection.prepareStatement("select * from hod where hname = ? AND hpassword = ?");			
 			
-			ps.setString(1, username);
-			ps.setString(2, password);
+			preparedstatement.setString(1, username);
+			preparedstatement.setString(2, password);
 			
-			ResultSet x = ps.executeQuery();
+			ResultSet x = preparedstatement.executeQuery();
 			
 			if(x.next()) {
 				
@@ -285,15 +285,15 @@ public class EngineerDeoImpl implements EngineerDeo{
          String message = "no login";
 		
 		
-        try(Connection conn = DButil.provideConnection()) {
+        try(Connection connection = DButil.provideConnection()) {
 			
 			
-			PreparedStatement ps= conn.prepareStatement("select * from Engineer where email = ? AND password = ?");			
+			PreparedStatement preparedstatement = connection.prepareStatement("select * from Engineer where email = ? AND password = ?");			
 			
-			ps.setString(1, email);
-			ps.setString(2, password);
+			preparedstatement.setString(1, email);
+			preparedstatement.setString(2, password);
 			
-			ResultSet x = ps.executeQuery();
+			ResultSet x = preparedstatement.executeQuery();
 			
 			if(x.next()) {
 				
@@ -327,16 +327,16 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
 		String message = "no delete";
 		
-            try(Connection conn = DButil.provideConnection()) {
+            try(Connection connection = DButil.provideConnection()) {
 			
 			
-			PreparedStatement ps= conn.prepareStatement("update Engineer set password= ? where email= ? AND password= ? ");			
+			PreparedStatement preparedstatement = connection.prepareStatement("update Engineer set password= ? where email= ? AND password= ? ");			
 			
-			ps.setString(1, newpassword);
-			ps.setString(2, email);
-			ps.setString(3, password);
+			preparedstatement.setString(1, newpassword);
+			preparedstatement.setString(2, email);
+			preparedstatement.setString(3, password);
 			
-			int x = ps.executeUpdate();
+			int x = preparedstatement.executeUpdate();
 			
 			if(x>0) {
 				
@@ -361,18 +361,18 @@ public class EngineerDeoImpl implements EngineerDeo{
 	public String registerEmployee(Employee employee) {
 		String message = "inserted";
 		
-         try(Connection conn= DButil.provideConnection()) {
+         try(Connection connection= DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement
+			PreparedStatement preparedstatement= connection.prepareStatement
 					("insert into employee values(?,?,?)");
 			
 			
 			
-			ps.setString(1, employee.getName());
-			ps.setString(2, employee.getUsername());
-			ps.setString(3, employee.getPassword());
+			preparedstatement.setString(1, employee.getName());
+			preparedstatement.setString(2, employee.getUsername());
+			preparedstatement.setString(3, employee.getPassword());
 			
-			int x= ps.executeUpdate();
+			int x= preparedstatement.executeUpdate();
 			
 			
 			if(x > 0)
@@ -396,15 +396,15 @@ public class EngineerDeoImpl implements EngineerDeo{
 		String message = "not";
 		
 		
-         try(Connection conn = DButil.provideConnection()) {
+         try(Connection connection = DButil.provideConnection()) {
 			
 			
-			PreparedStatement ps= conn.prepareStatement("select * from employee where username = ? AND password = ?");			
+			PreparedStatement preparedstatement= connection.prepareStatement("select * from employee where username = ? AND password = ?");			
 			
-			ps.setString(1, username);
-			ps.setString(2, password);
+			preparedstatement.setString(1, username);
+			preparedstatement.setString(2, password);
 			
-			ResultSet x = ps.executeQuery();
+			ResultSet x = preparedstatement.executeQuery();
 			
 			if(x.next()) {
 				
@@ -430,19 +430,19 @@ public class EngineerDeoImpl implements EngineerDeo{
 		String message = "not raised";
 		
 		
-          try(Connection conn= DButil.provideConnection()) {
+          try(Connection connection= DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement
+			PreparedStatement preparedstatement= connection.prepareStatement
 					("insert into problem(category, status, pname) values(?,?,?)");
 			
 			
 			
-			ps.setString(1, category);
-			ps.setString(2, status);
-			ps.setString(3, pname);
+			preparedstatement.setString(1, category);
+			preparedstatement.setString(2, status);
+			preparedstatement.setString(3, pname);
 			
 			
-			int x= ps.executeUpdate();
+			int x= preparedstatement.executeUpdate();
 			
 			
 			if(x > 0)
@@ -465,21 +465,21 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
 		List<Problem> list = new ArrayList<>();
 		
-           try(Connection conn= DButil.provideConnection()) {
+           try(Connection connection= DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement("select * from problem");
+			PreparedStatement preparedstatement= connection.prepareStatement("select * from problem");
 			
 			
 			
-			ResultSet rs= ps.executeQuery();
+			ResultSet resultset= preparedstatement.executeQuery();
 			
-			while(rs.next()) {
+			while(resultset.next()) {
 				
 				
-				int p= rs.getInt("pid");
-				String c= rs.getString("category");
-				String s= rs.getString("status");
-				String n= rs.getString("pname");
+				int p= resultset.getInt("pid");
+				String c= resultset.getString("category");
+				String s= resultset.getString("status");
+				String n= resultset.getString("pname");
 				
 			Problem problem =new Problem(p, c, s, n);	
 				
@@ -507,20 +507,20 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
 		List<EngineerPRO> list = new ArrayList<>();
 		
-           try(Connection conn= DButil.provideConnection()) {
+           try(Connection connection= DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement("select p.pname,p.category,p.pid, p.status from problem p INNER JOIN Engineer e INNER JOIN pro_eng pe ON p.pid= pe.id AND e.name = pe.ename AND e.name = ? ;");
-			ps.setString(1, name);
+			PreparedStatement preparedstatement= connection.prepareStatement("select p.pname,p.category,p.pid, p.status from problem p INNER JOIN Engineer e INNER JOIN pro_eng pe ON p.pid= pe.id AND e.name = pe.ename AND e.name = ? ;");
+			preparedstatement.setString(1, name);
 			
 			
-			ResultSet rs= ps.executeQuery();
+			ResultSet resultset= preparedstatement.executeQuery();
 			
-			while(rs.next()) {
+			while(resultset.next()) {
 				
-				String n= rs.getString("pname");
-				String c= rs.getString("category");
-				String s= rs.getString("status");
-				int p= rs.getInt("pid");
+				String n= resultset.getString("pname");
+				String c= resultset.getString("category");
+				String s= resultset.getString("status");
+				int p= resultset.getInt("pid");
 				
 			EngineerPRO engineerpro = new EngineerPRO(n, c, s, p);
 				
@@ -549,14 +549,14 @@ public class EngineerDeoImpl implements EngineerDeo{
 	public String updateStatus(String sts, int id) throws ProblemException {
 		String str = "Updated";
 		
-         try(Connection conn= DButil.provideConnection()) {
+         try(Connection connection= DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement("update problem set status = ? where pid= ?");
-			ps.setString(1, sts);
-			ps.setInt(2, id);
+			PreparedStatement preparedstatement= connection.prepareStatement("update problem set status = ? where pid= ?");
+			preparedstatement.setString(1, sts);
+			preparedstatement.setInt(2, id);
 			
 			
-			int x = ps.executeUpdate();
+			int x = preparedstatement.executeUpdate();
 			
 			if(x>0) {
 				str = "status updated !";
@@ -577,18 +577,18 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
 		List<EmployeePro> list = new ArrayList<>();
 		
-        try(Connection conn= DButil.provideConnection()) {
+        try(Connection connection= DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement("select e.name,p.pname from problem p INNER JOIN Engineer e INNER JOIN pro_eng pe ON p.pid= pe.id AND e.name = pe.ename AND p.pid = ? ");
-			ps.setInt(1, pid);
+			PreparedStatement preparedstatement= connection.prepareStatement("select e.name,p.pname from problem p INNER JOIN Engineer e INNER JOIN pro_eng pe ON p.pid= pe.id AND e.name = pe.ename AND p.pid = ? ");
+			preparedstatement.setInt(1, pid);
 			
 			
-			ResultSet rs= ps.executeQuery();
+			ResultSet resultset= preparedstatement.executeQuery();
 			
-			while(rs.next()) {
+			while(resultset.next()) {
 				
-				String n= rs.getString("name");
-				String p= rs.getString("pname");
+				String n= resultset.getString("name");
+				String p= resultset.getString("pname");
 				
 			EmployeePro ep = new EmployeePro(n, p);
 				
@@ -621,21 +621,21 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
          List<Problem> list = new ArrayList<>();
 		
-        try(Connection conn= DButil.provideConnection()) {
+        try(Connection connection= DButil.provideConnection()) {
 			
-			PreparedStatement ps= conn.prepareStatement("select p.pid,p.category, p.status, p.pname from problem p INNER JOIN Engineer e INNER JOIN pro_eng pe ON p.pid= pe.id AND e.name = pe.ename AND p.pid = ? ");
-			ps.setInt(1, id);
+			PreparedStatement preparedstatement= connection.prepareStatement("select p.pid,p.category, p.status, p.pname from problem p INNER JOIN Engineer e INNER JOIN pro_eng pe ON p.pid= pe.id AND e.name = pe.ename AND p.pid = ? ");
+			preparedstatement.setInt(1, id);
 			
 			
-			ResultSet rs= ps.executeQuery();
+			ResultSet resultset= preparedstatement.executeQuery();
 			
-			while(rs.next()) {
-				int pi = rs.getInt("pid");
-				String c= rs.getString("category");
-				String s= rs.getString("status");
-				String pn = rs.getString("pname");
+			while(resultset.next()) {
+				int pid = resultset.getInt("pid");
+				String cate= resultset.getString("category");
+				String status= resultset.getString("status");
+				String pname = resultset.getString("pname");
 				
-				Problem problem = new Problem(pi, c, s, pn); 
+				Problem problem = new Problem(pid, cate, status, pname); 
 				
 			list.add(problem);
 			
@@ -665,16 +665,16 @@ public class EngineerDeoImpl implements EngineerDeo{
 		
 		String message = "no delete";
 		
-        try(Connection conn = DButil.provideConnection()) {
+        try(Connection connection = DButil.provideConnection()) {
 		
 		
-		PreparedStatement ps= conn.prepareStatement("update employee set password= ? where username= ? AND password= ? ");			
+		PreparedStatement preparedstatement= connection.prepareStatement("update employee set password= ? where username= ? AND password= ? ");			
 		
-		ps.setString(1, newpassword);
-		ps.setString(2, user);
-		ps.setString(3, password);
+		preparedstatement.setString(1, newpassword);
+		preparedstatement.setString(2, user);
+		preparedstatement.setString(3, password);
 		
-		int x = ps.executeUpdate();
+		int x = preparedstatement.executeUpdate();
 		
 		if(x>0) {
 			

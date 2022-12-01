@@ -37,10 +37,12 @@ public class Demo {
 			
 			
 			System.out.println("Login as HOD");
+	
 			System.out.println("Submit a username");
-			String user = sc.next();
+			sc.nextLine();
+			String user = sc.nextLine();
 			System.out.println("Submit a password");
-			String pass = sc.next();
+			String pass = sc.nextLine();
 			
 			try {
 				
@@ -66,18 +68,18 @@ public class Demo {
 						
 						while(true) {
 							
-							
+							sc.nextLine();
 							System.out.println("Enter Engineer Name:");
-							String ename= sc.next();
+							String ename= sc.nextLine();
 							
 							System.out.println("Enter Engineer Email:");
-							String email= sc.next();
+							String email= sc.nextLine();
 							
 							System.out.println("Enter Engineer Password:");
-							String password= sc.next();
+							String password= sc.nextLine();
 							
 							System.out.println("Enter Engineer Category");
-							String category= sc.next();
+							String category= sc.nextLine();
 							
 							
 							EngineerDeo deo = new EngineerDeoImpl();
@@ -90,7 +92,7 @@ public class Demo {
 							System.out.println(result);
 							
 							System.out.println("wants to add more ? yes/no");
-							String ans2 = sc.next();
+							String ans2 = sc.nextLine();
 							
 							if(ans2.equalsIgnoreCase("no")) {
 								break;
@@ -136,8 +138,9 @@ public class Demo {
 					
 					else if(command == 3) {
 						
+						sc.nextLine();
 						System.out.println("Enter here engineer name to delete ");
-						String name = sc.next();
+						String name = sc.nextLine();
 					
 					   EngineerDeo deo = new EngineerDeoImpl();
 					   
@@ -193,8 +196,9 @@ public class Demo {
 						System.out.println("Enter problem ID ");
 						int pid = sc.nextInt();
 						
+						sc.nextLine();
 						System.out.println("Enter Engineer name ");
-						String name = sc.next();
+						String name = sc.nextLine();
 						
 						try {
 							String result3 = deo.assignProblemWithEngineer(pid, name);
@@ -232,8 +236,10 @@ public class Demo {
 		else if(ans==2) {
 			
 			System.out.println("Login as Engineer");
+			
+			sc.nextLine();
 			System.out.println("Submit HOD provided email here");
-			String email = sc.next();
+			String email = sc.nextLine();
 			System.out.println("Submit HOD provided password here");
 			String pass = sc.next();
 			
@@ -257,12 +263,13 @@ public class Demo {
 					int command = sc.nextInt();
 					
 					if(command==4) {
+						sc.nextLine();
 						System.out.println("submit your old email");
-						String oldemail = sc.next();
+						String oldemail = sc.nextLine();
 						System.out.println("submit your old password");
-						String oldpass = sc.next();
+						String oldpass = sc.nextLine();
 						System.out.println("submit a new password");
-						String newpass = sc.next();
+						String newpass = sc.nextLine();
 						
 						EngineerDeo deo = new EngineerDeoImpl();
 						String result = deo.changePassword(oldemail, oldpass, newpass);
@@ -272,8 +279,9 @@ public class Demo {
 					}
 					//here engineer see his assign problem
 					else if(command==1 || command == 3) {
+						sc.nextLine();
 						System.out.println("Please enter your name to see assign problem");
-						String eng_name = sc.next();
+						String eng_name = sc.nextLine();
 						EngineerDeo deo = new EngineerDeoImpl();
 						
 						try {
@@ -301,10 +309,12 @@ public class Demo {
 					}
 					//here engineer update his/her status
 					else if(command==2) {
+						
 						System.out.println("Please enter your name id");
 						int pro_id = sc.nextInt();
+						sc.nextLine();
 						System.out.println("Please enter your status (resolved/pending) ");
-						String stsname = sc.next();
+						String stsname = sc.nextLine();
 						
 						EngineerDeo deo = new EngineerDeoImpl();
 						
@@ -348,12 +358,13 @@ public class Demo {
 					
 					if(com==1) {
 						
+						sc.nextLine();
 						System.out.println("Submit your name here");
-						String empname = sc.next();
+						String empname = sc.nextLine();
 						System.out.println("Submit username here");
-						String empuser = sc.next();
+						String empuser = sc.nextLine();
 						System.out.println("Submit password here");
-						String emppass = sc.next();
+						String emppass = sc.nextLine();
 						
 						EngineerDeo deo1 = new EngineerDeoImpl();
 						
@@ -367,11 +378,11 @@ public class Demo {
 						
 					}
 					else if(com==2) {
-						
+						sc.nextLine();
 						System.out.println("Submit username here");
-						String empuser = sc.next();
+						String empuser = sc.nextLine();
 						System.out.println("Submit password here");
-						String emppass = sc.next();
+						String emppass = sc.nextLine();
 						
 						EngineerDeo deo1 = new EngineerDeoImpl();
 						
@@ -396,13 +407,13 @@ public class Demo {
 									while(true) {
 									
 									EngineerDeo deo = new EngineerDeoImpl();
-									
+									sc.nextLine();
 									System.out.println("Submit problem category (hardware/software)");
-									String catego = sc.next();
+									String catego = sc.nextLine();
 									System.out.println("Submit problem status ");
-									String status = sc.next();
+									String status = sc.nextLine();
 									System.out.println("Submit problem name ");
-									String pname = sc.next();
+									String pname = sc.nextLine();
 									
 									String result2 = deo.raiseComplain(catego, status, pname);
 									
@@ -481,13 +492,14 @@ public class Demo {
 								
 								//here employee change his/her password
 								else if(command==4) {
-								
+									
+								    sc.nextLine();
 									System.out.println("submit your old username");
-									String oldemail = sc.next();
+									String oldemail = sc.nextLine();
 									System.out.println("submit your old password");
-									String oldpass = sc.next();
+									String oldpass = sc.nextLine();
 									System.out.println("submit a new password");
-									String newpass = sc.next();
+									String newpass = sc.nextLine();
 									
 									EngineerDeo deo = new EngineerDeoImpl();
 									String result6;
